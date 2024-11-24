@@ -1,0 +1,8 @@
+{
+    "username" : "vikasv360test@gmail.com",
+    "password" : "Test@1234",
+     "productItem" : "iPhone",
+     "outOfStockNotifcationMsg" : "Products marked with *** are not available in the desired quantity or not in stock!",
+     "emptyCartMsgTxt" : "Your shopping cart is empty!",
+     "modifiedSuccessMsg":"Success: You have modified your wish list!"
+}
