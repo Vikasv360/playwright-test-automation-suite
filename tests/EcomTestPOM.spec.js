@@ -5,7 +5,7 @@ const { LogoutPage } = require("../PageObjects/LogoutPage");
 const { WishListPage } = require("../PageObjects/WishListPage");
 const testData = JSON.parse(JSON.stringify(require("../testData.json")));
 
-test.describe.configure({mode:'parallel'})
+// test.describe.configure({mode:'parallel'})
 test('Validate the functionality of adding item to cart from featured section of dashboard', async ({ page }) => {
 
     const dashboardPage = new DashboardPage(page);
@@ -67,5 +67,28 @@ test('Validate the functionality of adding item to wishlist from featured sectio
     await dashboardPage.goToLogoutPage();
     const logoutPage = new LogoutPage(page);
     await logoutPage.gotoDashboardFromLogoutPage();
+
+});
+
+test('Verify the validation messages for all the fields in Contact form', async ({page})=>{
+
+    await page.goto("https://tutorialsninja.com/demo/index.php");
+    await page.locator("div ul li a").first().click();
+    await page.locator("[class='btn btn-primary']").click();
+    expect(await page.locator("[class='text-danger']").nth(0)).toHaveText("Name must be between 3 and 32 characters!");
+    expect(await page.locator("[class='text-danger']").nth(1)).toHaveText("E-Mail Address does not appear to be valid!");
+    expect(await page.locator("[class='text-danger']").nth(2)).toHaveText("Enquiry must be between 10 and 3000 characters!");
+
+});
+
+test('Validate submitting the contact form', async ({page})=>{
+
+    await page.goto("https://tutorialsninja.com/demo/index.php");
+    await page.locator("div ul li a").first().click();
+    await page.locator("//h1[text()='Contact Us']").waitFor();
+    await page.locator("[id='input-name']").fill("vikas");
+    await page.locator("[id='input-email']").fill("vikasv360test@gmail.com");
+    await page.locator("[id='input-enquiry']").fill("Test@123456");
+    await page.locator("[class='btn btn-primary']").click();
 
 });
